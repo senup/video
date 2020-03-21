@@ -5,6 +5,8 @@ import com.wxapp.video.common.IMoocJSONResult;
 import com.wxapp.video.common.MD5Utils;
 import com.wxapp.video.entity.Users;
 import com.wxapp.video.service.IUsersService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@Api(value = "用户注册和登陆的接口",tags = {"注册和登陆的controller"})
 public class RegistLoginController {
 
     @Autowired
     private IUsersService usersService;
 
 
+    @ApiOperation(value = "用户注册",notes = "用户注册的接口")
     @PostMapping("/regist")
     public IMoocJSONResult regist(@RequestBody Users user ) throws Exception {
         //判断用户是否为空
