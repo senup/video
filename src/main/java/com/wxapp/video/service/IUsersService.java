@@ -17,4 +17,5 @@ public interface IUsersService extends IService<Users> {
 
     void saveUser(Users user);
 
+    Users queryUserForLogin(String username,String password);
 }

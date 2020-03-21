@@ -40,4 +40,15 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         user.setId(userId);
         usersMapper.insert(user);
     }
+
+
+
+
+    //通过用户名和密码查找
+    public Users queryUserForLogin(String username,String password) {
+        QueryWrapper<Users> wrapper=new QueryWrapper<>();
+        wrapper.eq("username",username).eq("password",password);
+        Users user = usersMapper.selectOne(wrapper);
+        return user;
+    }
 }
