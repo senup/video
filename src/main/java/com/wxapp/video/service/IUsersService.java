@@ -13,4 +13,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUsersService extends IService<Users> {
 
+    boolean queryUsernameIsExist(String username);
+
+    void saveUser(Users user);
+
 }
