@@ -53,9 +53,7 @@ public class Videos implements Serializable {
     @ApiModelProperty(value = "喜欢/赞美的数量")
     private Long likeCounts;
 
-    @ApiModelProperty(value = "视频状态：
-1、发布成功
-2、禁止播放，管理员操作")
+    @ApiModelProperty(value = "视频状态： 1、发布成功 2、禁止播放，管理员操作")
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")
