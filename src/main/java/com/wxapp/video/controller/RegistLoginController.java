@@ -6,6 +6,7 @@ import com.wxapp.video.entity.Users;
 import com.wxapp.video.service.IUsersService;
 import com.wxapp.video.vo.UsersVo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -87,6 +88,17 @@ public class RegistLoginController extends BasicController{
 
         }
 
+
+    }
+
+
+    @ApiOperation(value = "用户注销",notes = "用户注销的接口")
+    @ApiImplicitParam(name = "userId",value = "用户id",required =true,dataType ="String",paramType = "query")
+    @PostMapping("/logout")
+    public IMoocJSONResult logout(String userId) throws Exception {
+        redis.del(USER_REDIS_SESSION+":"+userId);
+
+        return IMoocJSONResult.ok("哈哈哈哈删除了！");
 
     }
 
