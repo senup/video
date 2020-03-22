@@ -4,6 +4,9 @@ package com.wxapp.video.controller;
 import com.wxapp.video.common.IMoocJSONResult;
 import com.wxapp.video.entity.Users;
 import com.wxapp.video.service.IUsersService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,8 @@ import java.util.List;
  * @since 2020-03-21
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
+@Api(value="用户相关业务的接口", tags= {"用户相关业务的controller"})
 public class UsersController {
     @Autowired
     private IUsersService usersService;
@@ -38,7 +42,9 @@ public class UsersController {
         return users;
     }
 
-
+    @ApiOperation(value="用户上传头像", notes="用户上传头像的接口")
+    @ApiImplicitParam(name="userId", value="用户id", required=true,
+            dataType="String", paramType="query")
     @PostMapping("/uploadFace")
     public IMoocJSONResult uploadFace(String userId, @RequestParam("file") MultipartFile[] files) throws Exception {
         //判断用户名不能为空
