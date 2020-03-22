@@ -1,5 +1,6 @@
 package com.wxapp.video.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class UsersVo implements Serializable {
     private String username;
 
     @ApiModelProperty(value = "密码",name = "password",example = "123456",required =true)
+    @JsonIgnore//不会传输密码到前端
     private String password;
 
     @ApiModelProperty(value = "我的头像，如果没有默认给一张",hidden = true)

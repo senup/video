@@ -4,17 +4,16 @@ package com.wxapp.video.controller;
 import com.wxapp.video.common.IMoocJSONResult;
 import com.wxapp.video.entity.Users;
 import com.wxapp.video.service.IUsersService;
+import com.wxapp.video.vo.UsersVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -35,12 +34,29 @@ public class UsersController {
     @Autowired
     private IUsersService usersService;
 
-
+    //测试
     @RequestMapping("/test")
     public List<Users> findAll() {
         List<Users> users = usersService.list();
         return users;
     }
+
+    @ApiOperation(value="查询用户信息", notes="查询用户信息的接口")
+    @ApiImplicitParam(name="userId", value="用户id", required=true,
+            dataType="String", paramType="query")
+    @PostMapping("/query")
+    public IMoocJSONResult query(String userId){
+        //判空
+        if(StringUtils.isBlank(userId)){
+            return IMoocJSONResult.errorMsg("用户ID不能为空！");
+        }
+        Users result = usersService.getById(userId);
+        UsersVo usersVo = new UsersVo();
+        BeanUtils.copyProperties(result,usersVo);
+        return IMoocJSONResult.ok(usersVo);
+    }
+
+
 
     @ApiOperation(value="用户上传头像", notes="用户上传头像的接口")
     @ApiImplicitParam(name="userId", value="用户id", required=true,

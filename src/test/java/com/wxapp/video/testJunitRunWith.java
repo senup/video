@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -41,5 +42,16 @@ public class testJunitRunWith {
         u.setId("200321GZTKR6SPPH");
         u.setFaceImage("hahahah");
         usersService.updateById(u);
+    }
+
+
+    //测试查询全部功能
+    @Test
+    public void testListAll(){
+        List<Users> users = usersService.list();
+        for (Users u:users) {
+            System.out.println(u);
+        }
+
     }
 }
