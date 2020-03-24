@@ -4,6 +4,7 @@ import com.wxapp.video.entity.Bgm;
 import com.wxapp.video.mapper.BgmMapper;
 import com.wxapp.video.service.IBgmService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BgmServiceImpl extends ServiceImpl<BgmMapper, Bgm> implements IBgmService {
+
+
 
 }
