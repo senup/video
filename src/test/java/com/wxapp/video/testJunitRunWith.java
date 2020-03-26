@@ -98,5 +98,32 @@ public class testJunitRunWith {
     }
 
 
+//    @Autowired
+//    private FyUserService service;
+//
+//    /**
+//     * 联表查询并分页
+//     */
+//    @Test
+//    public void contextLoads() {
+//        // 当前页，总条数 构造 page 对象
+//        Page<UserRoleVo> page = new Page<>(1, 10);
+//        page.setRecords(service.selectUserListPage(page));
+//        System.out.println(page);
+//    }
+
+    //测试分页+ 多表
+    @Test
+    public void test4(){
+        Page<VideosVo> page = new Page<>(1, 5);
+        page.setRecords(videosMapperCustom.queryAllVideos(page));
+        List<VideosVo> records = page.getRecords();
+        for (VideosVo v:records
+             ) {
+            System.out.println(v);
+        }
+
+    }
+
 
 }

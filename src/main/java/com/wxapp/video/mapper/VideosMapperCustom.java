@@ -1,6 +1,7 @@
 package com.wxapp.video.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wxapp.video.entity.Videos;
 import com.wxapp.video.vo.VideosVo;
 
@@ -16,6 +17,9 @@ import java.util.List;
  */
 public interface VideosMapperCustom extends BaseMapper<VideosVo> {
 
-    List<VideosVo> queryAllVideos();
+//    @Select("SELECT * FROM fy_user u LEFT JOIN fy_role r ON u.role = r.id")
+//    List<UserRoleVo> selectUserListPage(Page<UserRoleVo> pagination);
+
+    List<VideosVo> queryAllVideos(Page<VideosVo> pagination);
 
 }
