@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wxapp.video.entity.Users;
+import com.wxapp.video.entity.Videos;
+import com.wxapp.video.mapper.VideosMapperCustom;
 import com.wxapp.video.service.IUsersService;
+import com.wxapp.video.vo.VideosVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ import java.util.List;
 public class testJunitRunWith {
     @Autowired
     private IUsersService usersService;
+    @Autowired
+    private VideosMapperCustom videosMapperCustom;
 
     @Test
     public void line() {
@@ -91,4 +96,7 @@ public class testJunitRunWith {
         }
 
     }
+
+
+
 }
