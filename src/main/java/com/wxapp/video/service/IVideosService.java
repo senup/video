@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-03-21
  */
 public interface IVideosService extends IService<Videos> {
+    String saveVideo(Videos video);
 
+    String updateVideo(String videoId, String uploadPathDB);
 }
