@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wxapp.video.entity.Videos;
 import com.wxapp.video.vo.VideosVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface VideosMapperCustom extends BaseMapper<VideosVo> {
 
 //    @Select("SELECT * FROM fy_user u LEFT JOIN fy_role r ON u.role = r.id")
 //    List<UserRoleVo> selectUserListPage(Page<UserRoleVo> pagination);
-
-    List<VideosVo> queryAllVideos(Page<VideosVo> pagination);
+    //多个参数使用注解@parm()
+    Page<VideosVo> queryAllVideos(@Param("videoDesc")String videoDesc, Page<VideosVo> pagination);
 
 }

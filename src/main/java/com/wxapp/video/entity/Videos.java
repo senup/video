@@ -6,8 +6,10 @@ import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -19,6 +21,8 @@ import lombok.experimental.Accessors;
  * @since 2020-03-21
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="Videos对象", description="视频信息表")
@@ -60,6 +64,8 @@ public class Videos implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
+
+
 
 
 }

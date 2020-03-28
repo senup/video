@@ -2,7 +2,9 @@ package com.wxapp.video.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wxapp.video.entity.SearchRecords;
 import com.wxapp.video.entity.Videos;
+import com.wxapp.video.mapper.SearchRecordsMapper;
 import com.wxapp.video.mapper.VideosMapper;
 import com.wxapp.video.mapper.VideosMapperCustom;
 import com.wxapp.video.org.n3r.idworker.Sid;
@@ -24,6 +26,11 @@ import java.util.List;
  */
 @Service
 public class VideosServiceCustomImpl extends ServiceImpl<VideosMapperCustom, VideosVo> implements IVideosServiceCustom {
+    @Autowired
+    private Sid sid;
+
+    @Autowired
+    private SearchRecordsMapper searchRecordsMapper;
 
     @Autowired
     private VideosMapperCustom videosMapperCustom;
@@ -31,8 +38,15 @@ public class VideosServiceCustomImpl extends ServiceImpl<VideosMapperCustom, Vid
 
 
 
-    public List<VideosVo> queryAllVideos(Page<VideosVo> page) {
 
-        return videosMapperCustom.queryAllVideos(page);
+//    public Page<VideosVo> queryAllVideos(Page<VideosVo> page) {
+//
+//        return this.baseMapper.queryAllVideos(page);
+//    }
+
+    @Override
+    public Page<VideosVo> queryAllVideos(Videos video, Page<VideosVo> page) {
+
+        return videosMapperCustom.queryAllVideos(video.getVideoDesc(),page);
     }
 }

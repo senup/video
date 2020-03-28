@@ -1,14 +1,22 @@
 package com.wxapp.video.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wxapp.video.common.FetchVideoCover;
 import com.wxapp.video.common.IMoocJSONResult;
 import com.wxapp.video.common.MergeVideoMp3;
 import com.wxapp.video.entity.Bgm;
+import com.wxapp.video.entity.SearchRecords;
 import com.wxapp.video.entity.Videos;
 import com.wxapp.video.enums.VideoStatusEnum;
+import com.wxapp.video.mapper.VideosMapperCustom;
+import com.wxapp.video.org.n3r.idworker.Sid;
 import com.wxapp.video.service.IBgmService;
+import com.wxapp.video.service.ISearchRecordsService;
 import com.wxapp.video.service.IVideosService;
+import com.wxapp.video.service.IVideosServiceCustom;
+import com.wxapp.video.vo.VideosVo;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -16,10 +24,8 @@ import io.swagger.annotations.ApiParam;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -47,6 +53,16 @@ public class VideosController extends BasicController{
 
     @Autowired
     private IVideosService videoService;
+    @Autowired
+    private IVideosServiceCustom videosServiceCustom;
+
+    @Autowired
+    private ISearchRecordsService searchRecordsService;
+
+    @Autowired
+    private Sid sid;
+
+
 
 
     @ApiOperation(value="上传视频", notes="上传视频的接口")
@@ -237,6 +253,56 @@ public class VideosController extends BasicController{
         videoService.updateVideo(videoId, uploadPathDB);
 
         return IMoocJSONResult.ok();
+    }
+
+
+    //总页数 当前页 查询出的分页记录 所有的数据量
+    //        private long total;			总记录
+    //        private long current;		当前的页数
+    //        private List<T> records;   对象列表
+//    pages
+
+
+
+    //        private List<T> records;   对象列表
+//        private long total;			总记录
+//        private long size;			每页记录数
+//        private long current;		当前的页数
+//        private List<OrderItem> orders;    //和数据库列有关
+//        private boolean optimizeCountSql;  //是否记录优化
+//        private boolean isSearchCount;     //是否搜索
+
+
+    /**
+     *
+     * @Description: 分页和搜索查询视频列表
+     * isSaveRecord：1 - 需要保存
+     * 				 0 - 不需要保存 ，或者为空的时候
+     */
+    @PostMapping(value="/showAll")
+    public IMoocJSONResult showAll(
+            @RequestBody Videos video,Integer isSaveRecord,
+                                   Integer page, Integer pageSize) throws Exception {
+        // 保存热搜词
+        String desc = video.getVideoDesc();
+        if(isSaveRecord!=null && isSaveRecord==1){
+            SearchRecords searchRecords = new SearchRecords();
+            String s = sid.nextShort();
+            searchRecords.setId(s);
+            searchRecords.setContent(desc);
+            searchRecordsService.save(searchRecords);
+        }
+
+        //分页
+        if (page == null) {
+            page = 1;
+        }
+        if (pageSize == null) {
+            pageSize = PAGE_SIZE;
+        }
+        Page<VideosVo> pageObject = new Page<>(page, pageSize);
+        Page<VideosVo> results = videosServiceCustom.queryAllVideos(video,pageObject);
+        return IMoocJSONResult.ok(results);
     }
 
 }

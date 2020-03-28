@@ -1,7 +1,9 @@
 package com.wxapp.video.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wxapp.video.entity.Videos;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wxapp.video.vo.VideosVo;
 
 /**
  * <p>
@@ -15,4 +17,5 @@ public interface IVideosService extends IService<Videos> {
     String saveVideo(Videos video);
 
     String updateVideo(String videoId, String uploadPathDB);
+
 }

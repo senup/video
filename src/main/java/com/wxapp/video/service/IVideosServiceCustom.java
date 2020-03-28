@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface IVideosServiceCustom extends IService<VideosVo> {
 
-    List<VideosVo> queryAllVideos(Page<VideosVo> page);
+    Page<VideosVo> queryAllVideos(Videos video,Page<VideosVo> page);
 
 
 }

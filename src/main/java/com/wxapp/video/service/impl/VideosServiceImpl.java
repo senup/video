@@ -1,10 +1,13 @@
 package com.wxapp.video.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wxapp.video.entity.Videos;
 import com.wxapp.video.mapper.VideosMapper;
+import com.wxapp.video.mapper.VideosMapperCustom;
 import com.wxapp.video.org.n3r.idworker.Sid;
 import com.wxapp.video.service.IVideosService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wxapp.video.vo.VideosVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,8 @@ public class VideosServiceImpl extends ServiceImpl<VideosMapper, Videos> impleme
     private Sid sid;
 
 
+
+
     public String saveVideo(Videos video){
         String id = sid.nextShort();
         video.setId(id);
@@ -41,5 +46,7 @@ public class VideosServiceImpl extends ServiceImpl<VideosMapper, Videos> impleme
         videosMapper.updateById(video);
         return videoId;
     }
+
+
 
 }
